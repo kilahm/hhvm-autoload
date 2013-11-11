@@ -13,7 +13,7 @@ class FE_AutoloadMapGenerator {
     return fe_autoload_map_definitions($path, $flags);
   }
 
-  public static function getDefinitionsForTree(
+  public static function getMapForTree(
     string $root,
     int $flags,
     ?string $prefix = null

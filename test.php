@@ -22,7 +22,7 @@ if (array_diff($native, $wrapped) || array_diff($wrapped, $native)) {
 }
 printf("From %s:\n\n%s\n\n", __FILE__, var_export($native, true));
 
-$tree = FE_AutoloadMapGenerator::getDefinitionsForTree(
+$tree = FE_AutoloadMapGenerator::getMapForTree(
   realpath(__DIR__).'/test-definitions',
   FE_AutoloadMapGenerator::ALLOW_HIPHOP_SYNTAX,
 );
