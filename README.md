@@ -1,6 +1,8 @@
-= Autoload Map Generator for HHVM
+Autoload Map Generator for HHVM
+===============================
 
-== What is this?
+What is this?
+-------------
 
 HHVM has a handy alternative to Zend's `__autoload` and `spl_autoload_register`,
 `fb_autoload_map`:
@@ -25,7 +27,8 @@ HHVM has a handy alternative to Zend's `__autoload` and `spl_autoload_register`,
 
 This is an HHVM extension that provides an easy way to generate this map.
 
-== How do I use it?
+How do I use it?
+----------------
 
 Once you've built it:
 
@@ -47,7 +50,8 @@ or, maybe:
 
 You probably want to cache the result rather than running this on every request ;)
 
-== How do I install it?
+How do I install it?
+--------------------
 
 You need to have built HHVM from source - then:
 
