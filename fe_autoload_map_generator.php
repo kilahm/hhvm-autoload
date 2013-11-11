@@ -12,6 +12,42 @@ class FE_AutoloadMapGenerator {
   ): array {
     return fe_autoload_map_definitions($path, $flags);
   }
+
+  public static function getDefinitionsForTree(
+    string $root,
+    int $flags,
+    ?string $prefix = null
+  ): array {
+    $root = realpath($root);
+    $combined = array(
+      'class' => array(),
+      'function' => array(),
+      'constant' => array(),
+    );
+
+    for (
+      $it = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($root)
+      );
+      $it->valid();
+      $it->next()
+    ) {
+      $path = $it->key();
+      $relative = $prefix.substr($path, strlen($root) + 1);
+      $definitions = self::getDefinitionsForFile($path, $flags);
+      foreach ($definitions['class'] as $def) {
+        $combined['class'][$def] = $relative;
+      }
+      foreach ($definitions['function'] as $def) {
+        $combined['function'][$def] = $relative;
+      }
+      foreach ($definitions['constant'] as $def) {
+        $combined['constant'][$def] = $relative;
+      }
+    }
+
+    return $combined;
+  }
 }
 
 <<__Native>>

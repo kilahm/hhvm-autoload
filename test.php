@@ -18,6 +18,18 @@ $wrapped = FE_AutoloadMapGenerator::getDefinitionsForFile(
 );
 
 if (array_diff($native, $wrapped) || array_diff($wrapped, $native)) {
-  throw "Mismatch between native and wrapped\n";
+  throw new Error("Mismatch between native and wrapped\n");
 }
 printf("From %s:\n\n%s\n\n", __FILE__, var_export($native, true));
+
+$tree = FE_AutoloadMapGenerator::getDefinitionsForTree(
+  realpath(__DIR__).'/test-definitions',
+  FE_AutoloadMapGenerator::ALLOW_HIPHOP_SYNTAX,
+);
+printf("From %s:\n\n%s\n\n", __FILE__, var_export($tree, true));
+
+if (class_exists('AutoloadedClass')) {
+  throw new Error("Some strange magic happened");
+}
+fb_autoload_map($tree, realpath(__DIR__).'/test-definitions/');
+AutoloadedClass::weNeedToGoDeeper();
