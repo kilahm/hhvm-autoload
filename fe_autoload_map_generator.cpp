@@ -12,7 +12,7 @@
 namespace HPHP {
 
 static Array HHVM_FUNCTION(
-  fe_xhpast2_definitions,
+  fe_autoload_map_definitions,
   const String& path,
   int64_t type
 ) {
@@ -92,15 +92,15 @@ static Array HHVM_FUNCTION(
   return return_data.create();
 }
 
-static class FE_XHPast2Extension : public Extension {
+static class FE_AutoloadMapGeneratorExtension : public Extension {
  public:
-  FE_XHPast2Extension() : Extension("fe_xhpast2") {}
+  FE_AutoloadMapGeneratorExtension() : Extension("fe_autoload_map_generator") {}
   virtual void moduleInit() {
-    HHVM_FE(fe_xhpast2_definitions);
+    HHVM_FE(fe_autoload_map_definitions);
     loadSystemlib();
   }
-} s_fe_xhpast2_extension;
+} s_fe_autoload_map_generator_extension;
 
-HHVM_GET_MODULE(fe_xhpast2)
+HHVM_GET_MODULE(fe_autoload_map_generator)
 
 } // namespace HPHP

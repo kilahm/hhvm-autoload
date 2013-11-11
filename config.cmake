@@ -1,2 +1,2 @@
-HHVM_EXTENSION(fe_xhpast2 fe_xhpast2.cpp)
-HHVM_SYSTEMLIB(fe_xhpast2 fe_xhpast2.php)
+HHVM_EXTENSION(fe_autoload_map_generator fe_autoload_map_generator.cpp)
+HHVM_SYSTEMLIB(fe_autoload_map_generator fe_autoload_map_generator.php)

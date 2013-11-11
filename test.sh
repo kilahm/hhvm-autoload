@@ -7,5 +7,5 @@ if [ ! -z "${REALPATH}" ]; then
 fi
 
 ${HPHP_HOME}/hphp/hhvm/hhvm \
-  -vDynamicExtensions.0=${DIRNAME}/fe_xhpast2.so \
+  -vDynamicExtensions.0=${DIRNAME}/fe_autoload_map_generator.so \
   ${DIRNAME}/test.php

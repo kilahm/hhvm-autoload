@@ -1,4 +1,4 @@
-<?php
+<?hh
 
 define('EXAMPLE_CONSTANT_1', 'herp');
 const EXAMPLE_CONSTANT_2 = 'derp';
@@ -11,6 +11,13 @@ class ExampleClass {
   }
 }
 
-var_export(
-  fe_xhpast2_definitions(__FILE__, FE_XHPAST2::ALLOW_HIPHOP_SYNTAX)
+$native = fe_autoload_map_definitions(__FILE__, 0x18);
+$wrapped = FE_AutoloadMapGenerator::getDefinitionsForFile(
+  __FILE__,
+  FE_AutoloadMapGenerator::ALLOW_HIPHOP_SYNTAX,
 );
+
+if (array_diff($native, $wrapped) || array_diff($wrapped, $native)) {
+  throw "Mismatch between native and wrapped\n";
+}
+printf("From %s:\n\n%s\n\n", __FILE__, var_export($native, true));
