@@ -1,6 +1,7 @@
 <?hh
 
 class FE_AutoloadMapGenerator {
+  const int ALLOW_DEFAULT = 0x00;
   const int ALLOW_SHORT_TAGS = 0x01; // < ? (without the space)
   const int ALLOW_ASP_TAGS = 0x02; // < %     % > (without the spaces)
   const int ALLOW_XHP_SYNTAX = 0x08;
@@ -8,14 +9,14 @@ class FE_AutoloadMapGenerator {
 
   public static function getDefinitionsForFile(
     string $path,
-    int $flags,
+    int $flags = self::ALLOW_DEFAULT,
   ): array {
     return fe_autoload_map_definitions($path, $flags);
   }
 
   public static function getMapForTree(
     string $root,
-    int $flags,
+    int $flags = self::ALLOW_DEFAULT,
     ?string $prefix = null
   ): array {
     $root = realpath($root);
