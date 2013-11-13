@@ -7,7 +7,7 @@ function example_function() {
 class ExampleClass {
   /* Should not be in function map */
   const EXAMPLE_MEMBER_CONSTANT = 'how do I shot web?';
-  function exampleMemberFunction() {
+  public function exampleMemberFunction() {
   }
 }
 
@@ -33,3 +33,9 @@ if (class_exists('AutoloadedClass')) {
 }
 fb_autoload_map($tree, realpath(__DIR__).'/test-definitions/');
 AutoloadedClass::weNeedToGoDeeper();
+
+$tree = FE_AutoloadMapGenerator::getMapForTree(
+  '/home/fred/site-hack-xhp/lib',
+  FE_AutoloadMapGenerator::ALLOW_HIPHOP_SYNTAX,
+);
+var_dump($tree);

@@ -1,7 +1,7 @@
 <?hh
 
 class AutoloadedClass {
-  static function weNeedToGoDeeper() {
+  public static function weNeedToGoDeeper() {
     printf("Class autoloaded!\n");
     autoloaded_function();
   }

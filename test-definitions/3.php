@@ -1,3 +1,3 @@
 <?hh
 
-const string AUTOLOADED_CONSTANT = "Constant autoloaded!";
+const AUTOLOADED_CONSTANT = "Constant autoloaded!";

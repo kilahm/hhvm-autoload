@@ -19,21 +19,24 @@ class FE_AutoloadMapGenerator {
     int $flags = self::ALLOW_DEFAULT,
     ?string $prefix = null
   ): array {
-    $root = realpath($root);
+    //$root = realpath($root);
     $combined = array(
       'class' => array(),
       'function' => array(),
       'constant' => array(),
     );
+    printf("%s\n", $root);
 
     for (
       $it = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($root)
+        new RecursiveDirectoryIterator($root),
+        RecursiveIteratorIterator::CHILD_FIRST,
       );
       $it->valid();
       $it->next()
     ) {
       $path = $it->key();
+      printf("Looking at %s\n", $path);
       $relative = $prefix.substr($path, strlen($root) + 1);
       $definitions = self::getDefinitionsForFile($path, $flags);
       foreach ($definitions['class'] as $def) {
