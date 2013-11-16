@@ -25,7 +25,6 @@ class FE_AutoloadMapGenerator {
       'function' => array(),
       'constant' => array(),
     );
-    printf("%s\n", $root);
 
     for (
       $it = new RecursiveIteratorIterator(
@@ -36,7 +35,6 @@ class FE_AutoloadMapGenerator {
       $it->next()
     ) {
       $path = $it->key();
-      printf("Looking at %s\n", $path);
       $relative = $prefix.substr($path, strlen($root) + 1);
       $definitions = self::getDefinitionsForFile($path, $flags);
       foreach ($definitions['class'] as $def) {
