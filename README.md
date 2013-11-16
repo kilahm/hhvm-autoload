@@ -25,6 +25,10 @@ HHVM has a handy alternative to Zend's `__autoload` and `spl_autoload_register`,
       'prefix/',
     );
 
+It supports classes, functions, and constants, whereas
+`__autoload`/`spl_autoload_register` only support classes. You might also
+find it performs better.
+
 This is an HHVM extension that provides an easy way to generate this map.
 
 How do I use it?
