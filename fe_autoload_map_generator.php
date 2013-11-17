@@ -34,6 +34,11 @@ class FE_AutoloadMapGenerator {
       $it->valid();
       $it->next()
     ) {
+      // Some VCS systems leave .php.orig files around, which HHVM is quite
+      // happy to parse
+      if ($it->current()->getExtension() !== 'php') {
+        continue;
+      }
       $path = $it->key();
       $relative = $prefix.substr($path, strlen($root) + 1);
       $definitions = self::getDefinitionsForFile($path, $flags);
