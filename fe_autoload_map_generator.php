@@ -19,7 +19,7 @@ class FE_AutoloadMapGenerator {
     int $flags = self::ALLOW_DEFAULT,
     ?string $prefix = null
   ): array {
-    //$root = realpath($root);
+    $root = realpath($root);
     $combined = array(
       'class' => array(),
       'function' => array(),
