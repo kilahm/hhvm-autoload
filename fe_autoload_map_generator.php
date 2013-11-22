@@ -24,6 +24,7 @@ class FE_AutoloadMapGenerator {
       'class' => array(),
       'function' => array(),
       'constant' => array(),
+      'type' => array(),
     );
 
     for (
@@ -50,6 +51,9 @@ class FE_AutoloadMapGenerator {
       }
       foreach ($definitions['constant'] as $def) {
         $combined['constant'][$def] = $relative;
+      }
+      foreach ($definitions['type'] as $def) {
+        $combined['type'][$def] = $relative;
       }
     }
 

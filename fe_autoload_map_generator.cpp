@@ -43,6 +43,12 @@ static Array HHVM_FUNCTION(
     function_names.set(kv.first);
   }
 
+  auto types = file_scope->getTypeAliasNames();
+  ArrayInit type_names(types.size());
+  for (auto& name: types) {
+    type_names.set(name);
+  }
+
   std::vector<string> constants;
   // Global constants aren't available through getConstants() - only class
   // constants. We need to look through all function calls for define().
@@ -85,10 +91,11 @@ static Array HHVM_FUNCTION(
     constant_names.set(constant);
   }
 
-  ArrayInit return_data(3);
+  ArrayInit return_data(4);
   return_data.set(makeStaticString("class"), class_names.create());
   return_data.set(makeStaticString("function"), function_names.create());
   return_data.set(makeStaticString("constant"), constant_names.create());
+  return_data.set(makeStaticString("type"), type_names.create());
   return return_data.create();
 }
 
