@@ -1,6 +1,13 @@
 Autoload Map Generator for HHVM
 ===============================
 
+Warning
+-------
+
+This is a C++ extension for HHVM 2. For HHVM 3:
+ - use Composer if you just need class loading
+ - https://github.com/fredemmott/definitions-finder is a work-in-progress pure userspace autoload map generator.
+
 What is this?
 -------------
 
