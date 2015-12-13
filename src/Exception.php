@@ -2,7 +2,7 @@
 
 namespace FredEmmott\AutoloadMap;
 
-abstract class Exception extends \Exception {
+class Exception extends \Exception {
   public function __construct(
     \HH\FormatString<\PlainSprintf> $format,
     array<mixed> ...$args
