@@ -61,19 +61,6 @@ abstract final class ConfigurationLoader {
       $autoload_files_behavior = AutoloadFilesBehavior::assert($value);
     }
 
-    $composer_json_fallback = true;
-    if (array_key_exists('composerJsonFallback', $data)) {
-      $value = $data['composerJsonFallback'];
-      if (!is_bool($value)) {
-        throw new ConfigurationException(
-          'File "%s" has non-bool value of composerJsonFallback: %s',
-          $path,
-          var_export($value, true),
-        );
-      }
-      $composer_json_fallback = (bool) $value;
-    }
-
     $include_vendor = true;
     if (array_key_exists('includeVendor', $data)) {
       $value = $data['includeVendor'];
@@ -89,7 +76,6 @@ abstract final class ConfigurationLoader {
 
     return shape(
       'autoloadFilesBehavior' => $autoload_files_behavior,
-      'composerJsonFallback' => $composer_json_fallback,
       'includeVendor' => $include_vendor,
       'roots' => $roots->toImmVector(),
     );
