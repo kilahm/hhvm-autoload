@@ -10,7 +10,7 @@ final class RootImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::FIND_DEFINITIONS,
         'includeVendor' => true,
-        'roots' => ImmVector { $root },
+        'roots' => ImmVector { $root.'/src' },
       ),
     );
     $map = $importer->getAutoloadMap();
@@ -18,6 +18,7 @@ final class RootImporterTest extends \PHPUnit_Framework_TestCase {
       'FredEmmott\AutoloadMap\Exception',
       array_keys($map['class']),
     );
+
     $this->assertContains(
       'PHPUnit_Framework_TestCase',
       array_keys($map['class']),
@@ -32,9 +33,10 @@ final class RootImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::FIND_DEFINITIONS,
         'includeVendor' => false,
-        'roots' => ImmVector { $root },
+        'roots' => ImmVector { $root.'/src' },
       ),
     );
+
     $map = $importer->getAutoloadMap();
     $this->assertContains(
       'FredEmmott\AutoloadMap\Exception',
