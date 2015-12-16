@@ -1,5 +1,3 @@
 <?hh // strict
 
-namespace FredEmmott\AutoloadMap\TestFixtures;
-
-const string EXAMPLE_CONSTANT = 'herp';
+const string FREDEMMOTT_AUTOLOAD_MAP_TEST_FIXTURES_EXAMPLE_CONSTANT = 'herp';
