@@ -9,6 +9,7 @@ final class ConfigurationLoaderTest extends \PHPUnit_Framework_TestCase {
       'fully specified' => [[
         'autoloadFilesBehavior' => AutoloadFilesBehavior::EXEC_FILES,
         'includeVendor' => false,
+        'extraFiles' => [],
         'roots' => ['foo/', 'bar/'],
       ]],
       'just roots' => [[
@@ -68,10 +69,12 @@ final class ConfigurationLoaderTest extends \PHPUnit_Framework_TestCase {
 
     $config = Shapes::toArray($config); 
     foreach ($data as $key => $value) {
-      if ($key === 'roots') {
-        continue;
+      if (is_array($value)) {
+        $value = new ImmVector($value);
+        $this->assertEquals($value, $config[$key]);
+      } else {
+        $this->assertSame($value, $config[$key]);
       }
-      $this->assertSame($value, $config[$key]);
     }
   }
 }

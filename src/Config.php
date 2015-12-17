@@ -6,4 +6,5 @@ type Config = shape(
   'autoloadFilesBehavior' => AutoloadFilesBehavior,
   'includeVendor' => bool,
   'roots' => ImmVector<string>,
+  'extraFiles' => ImmVector<string>,
 );

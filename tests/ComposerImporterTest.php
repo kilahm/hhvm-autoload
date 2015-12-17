@@ -10,6 +10,7 @@ final class ComposerImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::FIND_DEFINITIONS,
         'includeVendor' => false,
+        'extraFiles' => ImmVector { },
         'roots' => ImmVector { $root },
       ),
     );
@@ -33,6 +34,7 @@ final class ComposerImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::EXEC_FILES,
         'includeVendor' => false,
+        'extraFiles' => ImmVector { },
         'roots' => ImmVector { $root },
       ),
     );
@@ -64,6 +66,7 @@ final class ComposerImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::EXEC_FILES,
         'includeVendor' => false,
+        'extraFiles' => ImmVector { },
         'roots' => ImmVector { $root },
       ),
     );
@@ -96,6 +99,7 @@ final class ComposerImporterTest extends \PHPUnit_Framework_TestCase {
       shape(
         'autoloadFilesBehavior' => AutoloadFilesBehavior::EXEC_FILES,
         'includeVendor' => false,
+        'extraFiles' => ImmVector { },
         'roots' => ImmVector { $root },
       ),
     );
