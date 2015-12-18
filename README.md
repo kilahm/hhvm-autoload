@@ -1,24 +1,23 @@
-Autoload Map Generator for HHVM
-===============================
-
 A Composer plugin for autoloading classes, enums, functions, typedefs, and constants on HHVM.
 
 FAQ
----
+===
 
-Q. Do I need to use Hack?
+Do I need to use Hack?
+----------------------
 
-A. No, PHP is fine - but HHVM is required because:
+No, PHP is fine - but HHVM is required because:
 
  - PHP does not support autoloading anything other than functions
  - this project and the parser are written in Hack
 
-Q. Can I autoload functions and constants if I'm not writing Hack?
+Can I autoload functions and constants if I'm not writing Hack?
+---------------------------------------------------------------
 
 A. Yes :)
 
-Pre-release Warning
--------------------
+Preview Warning
+===============
 
 The autoload mechanism itself is very heavily tested at Facebook, however
 [the library](https://github.com/fredemmott/definition-finder/) used to find the autoloadables (classes,
@@ -33,7 +32,7 @@ If you encounter a parse error, please [file an issue](https://github.com/fredem
 For any other issue, please [file an issue](https://github.com/fredemmott/hhvm-autoload/issues) against [this project](https://github.com/fredemmott/hhvm-autoload).
 
 Usage
------
+=====
 
 1. Add an `hh_autoload.json` file (see section below) and optionally remove your configuration from composer.json
 2. `composer require fredemmott/hhvm-autoload`
@@ -42,7 +41,7 @@ Usage
 5. To re-generate the map, run `composer dump-autoload` or any other command that generates the map
 
 Configuration (`hh_autoload.json`)
-----------------------------------
+==================================
 
 A minimal configuration file is:
 
@@ -61,7 +60,7 @@ The following settings are optional:
  - `"autoloadFilesBehavior": "scan"|"exec"` - whether autoload `files` from vendor should be `scan`ned for definitions, or `exec`uted by `vendor/hh_autoload.php` - `scan` is the default, and generally favorable, but `exec` is needed if you have dependencies that need code to be executed on startup. `scan` is sufficient if your dependencies just use `files` because they need to define things that aren't classes, which is usually the case.
 
 How It Works
-------------
+============
 
  - [`fredemmott/definition-finder`](https://github.com/fredemmott/definition-finder/) provides a list of all PHP and Hack definitions in the specified locations
  - This is used to generate something similar to a classmap, except including other kinds of definitions
