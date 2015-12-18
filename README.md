@@ -3,6 +3,20 @@ Autoload Map Generator for HHVM
 
 A Composer plugin for autoloading classes, enums, functions, typedefs, and constants on HHVM.
 
+FAQ
+---
+
+Q. Do I need to use Hack?
+
+A. No, PHP is fine - but HHVM is required because:
+
+ - PHP does not support autoloading anything other than functions
+ - this project and the parser are written in Hack
+
+Q. Can I autoload functions and constants if I'm not writing Hack?
+
+A. Yes :)
+
 Pre-release Warning
 -------------------
 
@@ -46,20 +60,11 @@ The following settings are optional:
  - `"includeVendor": false` - do not include `vendor/` definitions in `vendor/hh_autoload.php`
  - `"autoloadFilesBehavior": "scan"|"exec"` - whether autoload `files` from vendor should be `scan`ned for definitions, or `exec`uted by `vendor/hh_autoload.php` - `scan` is the default, and generally favorable, but `exec` is needed if you have dependencies that need code to be executed on startup. `scan` is sufficient if your dependencies just use `files` because they need to define things that aren't classes, which is usually the case.
 
-FAQ
----
+How It Works
+------------
 
-Q. Do I need to use Hack?
+ - [`fredemmott/definition-finder`](https://github.com/fredemmott/definition-finder/) provides a list of all PHP and Hack definitions in the specified locations
+ - This is used to generate something similar to a classmap, except including other kinds of definitions
+ - The map is provided to HHVM with [`HH\autoload_set_paths()`](https://docs.hhvm.com/hack/reference/function/HH.autoload_set_paths/)
 
-A. No, PHP is fine - but HHVM is required because:
-
- - PHP does not support autoloading anything other than functions
- - this project and the parser are written in Hack
-
-Q. Can I autoload functions and constants if I'm not writing Hack?
-
-A. Yes :)
-
-Q. Why does this project use Composer's autoloader?
-
-A. It can't depend on itself :)
+The [Composer plugin API](https://getcomposer.org/doc/articles/plugins.md) allows it to re-generate the `vendor/hh_autoload.php` file automatically whenever Composer itself regenerates `vendor/autoload.php`
