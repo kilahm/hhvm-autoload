@@ -8,7 +8,7 @@ Do I need to use Hack?
 
 No, PHP is fine - but HHVM is required because:
 
- - PHP does not support autoloading anything other than functions
+ - PHP does not support autoloading anything other than classes
  - this project and the parser are written in Hack
 
 Can I autoload functions and constants if I'm not writing Hack?
