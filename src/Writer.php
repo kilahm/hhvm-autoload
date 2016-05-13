@@ -24,7 +24,7 @@ final class Writer {
   }
 
   public function setRoot(string $root): this {
-    $this->root = realpath($root);
+    $this->root = $root;
     return $this;
   }
 
@@ -73,7 +73,7 @@ EOF;
       $destination_file,
       $code,
     );
-      
+
     return $this;
   }
 
