@@ -29,7 +29,9 @@ final class Writer {
     return $this;
   }
 
-  public function writeToFile(string $destination_file): this {
+  public function writeToFile(
+    string $destination_file,
+  ): this {
     $files = $this->files;
     $map = $this->map;
 
@@ -48,14 +50,16 @@ final class Writer {
     );
 
     $map = array_map(
-      function($sub_map): array<string, string> {
+      function ($sub_map): array<string, string> {
         assert(is_array($sub_map));
-        return array_map($path ==> $this->relativePath($path), $sub_map);
+        return array_map(
+          $path ==> $this->relativePath($path),
+          $sub_map,
+        );
       },
       Shapes::toArray($map),
     );
     $map = var_export($map, true);
-
     $root = $this->relativeRoot(dirname($destination_file));
     $code = <<<EOF
 <?hh
@@ -66,20 +70,29 @@ $requires
 
 HH\autoload_set_paths($map, \$root);
 EOF;
-    file_put_contents($destination_file, $code);
+    file_put_contents(
+      $destination_file,
+      $code,
+    );
 
     return $this;
   }
 
   <<__Memoize>>
-  private function relativePath(string $path): string {
+  private function relativePath(
+    string $path,
+  ): string {
     $root = $this->root;
     if ($root === null) {
       throw new Exception('Call setRoot() before writeToFile()');
     }
     $path = realpath($path);
     if (strpos($path, $root) !== 0) {
-      throw new Exception("%s is outside root %s", $path, $root);
+      throw new Exception(
+        "%s is outside root %s",
+        $path,
+        $root,
+      );
     }
     return substr($path, strlen($root) + 1);
   }
