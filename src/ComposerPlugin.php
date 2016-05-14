@@ -44,7 +44,7 @@ final class ComposerPlugin
     $this->debugMessage("Writing hh_autoload.php");
     (new Writer())
       ->setBuilder($importer)
-      ->setRoot($this->pathDifference($this->vendor, $this->root));
+      ->setRoot($this->root)
       ->writeToFile($this->vendor.'/hh_autoload.php');
   }
 
@@ -52,29 +52,5 @@ final class ComposerPlugin
     if ($this->io->isDebug()) {
       $this->io->write('hhvm-autoload: '.$message);
     }
-  }
-
-  private function pathDifference(\HH\string $from, \HH\string $to) {
-    $realFrom = realpath($from);
-    $realTo = realpath($to);
-
-    // Check if on different Windows drives
-    if(substr($realFrom, 0, 1) !== substr($realTo, 0, 1)) {
-      throw new \RuntimeException('Cannot find difference in path for separate drives.');
-    }
-
-    $fromParts = explode(DIRECTORY_SEPERATOR, realpath($from));
-    $toParts = explode(DIRECTORY_SEPERATOR, realpath($to));
-
-    // Remove common paths from the front
-    while(count($fromParts) && count($toParts) && $fromParts[0] === $toParts[0]) {
-      array_shift($fromParts);
-      array_shift($toParts);
-    }
-
-    // Trasform the left over from parts to ..
-    $upParts = array_map(function($part) { return '..'; }, $fromParts);
-
-    return implode(DIRECTORY_SEPERATOR, array_merge($upParts, $toParts));
   }
 }
