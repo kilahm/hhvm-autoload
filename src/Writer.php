@@ -7,7 +7,6 @@ final class Writer {
   private ?ImmVector<string> $files;
   private ?AutoloadMap $map;
   private ?string $root;
-  private int $updirs = 0;
 
   public function setFiles(ImmVector<string> $files): this {
     $this->files = $files;
